@@ -3,7 +3,7 @@
 </div>
 <div style="background:silver;padding:20px;text-align:center">
   <div *ngIf="!showMe">
-    <p>Enter Symbol of Stock to track ex- GOOGL, AAPL, TSLA</p>
+    <p>Enter Symbol of Stock to track ex- AMZN, AAPL,GME, TSLA</p>
     <input type="text" #box />
     <button (click)="getData(box.value)">Fetch Stock</button>
 
@@ -69,7 +69,12 @@
               <tbody>
                 <tr *ngFor="let item of res" style="padding=15px;spacing=15px">
                   <td>{{ item.symbol }}</td>
-                  <td>$ {{ item.month }}</td>
+                  <td>
+                    {{
+                      item.month < 2 ? 'Jan' : item.month > 2 ? 'Mar' : 'Feb'
+                    }}
+                  </td>
+
                   <td>$ {{ item.change }}</td>
                   <td>$ {{ item.mspr }}</td>
 
