@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Stock, StockService } from '../stock.service';
+import { StockService } from '../stock.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,6 +8,22 @@ import { Stock, StockService } from '../stock.service';
 })
 export class DashboardComponent implements OnInit {
   constructor(private _Service: StockService) {}
+  data: any[];
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.data = this._Service.allStorage();
+  }
+  showImage(val: number): string {
+    return val > 0 ? 'images/up.png' : 'images/down.png';
+  }
+
+  public getData(val1: string): void {
+    this._Service.getQuote(val1.toUpperCase());
+    this.ngOnInit();
+  }
+
+  remove(val: string) {
+    this._Service.remove(val);
+    this.ngOnInit();
+  }
 }
